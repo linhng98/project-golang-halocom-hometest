@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  mariadb:
+    container_name: "mariadb-halo"
+    build: "./mariadb"
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: "QA_service"
+      MYSQL_ROOT_PASSWORD: "halocom"
+    volumes:
+    - db_data:/var/lib/mariadb_halo
+  golang:
+    container_name: "golang-halo"
+    build: "./golang"
+    ports:
+      - "80:8080"
+    volumes: 
+      - "./golang/QA-app-halocom:/usr/src/QA-app-halocom"
+    working_dir: "/usr/src/QA-app-halocom"
+    depends_on:
+      - "mariadb"
+
+volumes:
+  db_data:
