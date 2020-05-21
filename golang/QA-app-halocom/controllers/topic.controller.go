@@ -42,7 +42,11 @@ func CreateTopic(c *gin.Context) {
 	db.Create(&reactObj)
 
 	// create new topic object
-	topicObj := models.Topic{AccountID: inputJSON.AccountID, ReactID: reactObj.ID, Title: inputJSON.Title, Content: inputJSON.Content}
+	topicObj := models.Topic{
+		AccountID: inputJSON.AccountID,
+		ReactID:   reactObj.ID,
+		Title:     inputJSON.Title,
+		Content:   inputJSON.Content}
 	db.Create(&topicObj)
 
 	for _, s := range inputJSON.Tag {
@@ -54,7 +58,9 @@ func CreateTopic(c *gin.Context) {
 		}
 
 		// get id from tag row, create new topic-tag record
-		topicTagObj := models.TopicTag{TopicID: topicObj.ID, TagID: tagObj.ID}
+		topicTagObj := models.TopicTag{
+			TopicID: topicObj.ID,
+			TagID:   tagObj.ID}
 		db.Create(&topicTagObj)
 	}
 

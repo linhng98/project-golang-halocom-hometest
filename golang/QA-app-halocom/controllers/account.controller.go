@@ -31,7 +31,10 @@ func CreateAccount(c *gin.Context) {
 	h := sha256.New()
 	h.Write([]byte(inputJSON.Password))                             // create new hash
 	hashedBase64PW := base64.StdEncoding.EncodeToString(h.Sum(nil)) // encode base64
-	accountObj := models.Account{Username: inputJSON.Username, HashedPassword: hashedBase64PW, Email: inputJSON.Email}
+	accountObj := models.Account{
+		Username:       inputJSON.Username,
+		HashedPassword: hashedBase64PW,
+		Email:          inputJSON.Email}
 
 	db.Create(&accountObj)
 	c.JSON(http.StatusOK, &accountObj)
