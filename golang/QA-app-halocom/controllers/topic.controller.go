@@ -16,6 +16,16 @@ type createTopicForm struct {
 	Tag       []string `json:"tag" binding:"required"`
 }
 
+// GetAllTopic api (GET /api/topic/get-all)
+func GetAllTopic(c *gin.Context) {
+	db := c.MustGet("db").(*gorm.DB)
+
+	var topics []models.Topic
+	db.Find(&topics)
+
+	c.JSON(http.StatusOK, &topics)
+}
+
 // CreateTopic api (POST /api/topic/create)
 func CreateTopic(c *gin.Context) {
 	db := c.MustGet("db").(*gorm.DB)
