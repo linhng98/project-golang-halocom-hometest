@@ -19,13 +19,17 @@ func main() {
 		c.Next()
 	})
 
-	r.GET("/api/topic/get-all", controllers.GetAllTopic )
+	r.GET("/api/topic/get-all", controllers.GetAllTopic)
 	r.POST("/api/topic/create", controllers.CreateTopic)
-	
+
 	r.POST("/api/account/create", controllers.CreateAccount)
 
 	r.GET("/api/answer/get-all", controllers.GetAllAnswer)
-	r.POST("/api/answer/create",controllers.CreateAnswer)
+	r.POST("/api/answer/create", controllers.CreateAnswer)
+
+	r.POST("/api/react/upvote", controllers.Upvote)
+	r.POST("/api/react/downvote", controllers.Downvote)
+	r.POST("/api/react/report", controllers.Report)
 
 	r.Run()
 }
