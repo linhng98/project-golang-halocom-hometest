@@ -1,20 +1,26 @@
 package main
 
 import (
+	_ "fmt"
 	"github.com/gin-gonic/gin"
-	"github.com/nobabykill/project-golang-halocom-hometest/utils"
+	_ "github.com/go-sql-driver/mysql"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
+	"github.com/nobabykill/project-golang-halocom-hometest/controllers"
+	"github.com/nobabykill/project-golang-halocom-hometest/utils"
 )
 
 func main() {
 	r := gin.Default()
 	db := utils.SetupModels()
 
-	// Provide db variable to controllers
+	// Provide db variable to controller
 	r.Use(func(c *gin.Context) {
 		c.Set("db", db)
 		c.Next()
 	})
+
+	r.POST("/api/topic/create", controllers.CreateTopic)
+	r.POST("/api/account/create", controllers.CreateAccount)
 
 	r.Run()
 }
