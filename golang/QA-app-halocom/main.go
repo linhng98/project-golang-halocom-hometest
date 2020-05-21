@@ -21,7 +21,11 @@ func main() {
 
 	r.GET("/api/topic/get-all", controllers.GetAllTopic )
 	r.POST("/api/topic/create", controllers.CreateTopic)
+	
 	r.POST("/api/account/create", controllers.CreateAccount)
+
+	r.GET("/api/answer/get-all", controllers.GetAllAnswer)
+	r.POST("/api/answer/create",controllers.CreateAnswer)
 
 	r.Run()
 }
