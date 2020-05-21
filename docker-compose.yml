@@ -10,13 +10,13 @@ services:
       MYSQL_DATABASE: "QA_service"
       MYSQL_ROOT_PASSWORD: "halocom"
     volumes:
-    - db_data:/var/lib/mariadb_halo
+      - db_data:/var/lib/mariadb_halo
   golang:
     container_name: "golang-halo"
     build: "./golang"
     ports:
       - "80:8080"
-    volumes: 
+    volumes:
       - "./golang/QA-app-halocom:/usr/src/QA-app-halocom"
     working_dir: "/usr/src/QA-app-halocom"
     depends_on:
